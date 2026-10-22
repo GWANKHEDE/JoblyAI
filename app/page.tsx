@@ -901,7 +901,6 @@ export default function HomePage({
             <>
               <section className="welcome-row">
                 <div>
-                  <p className="eyebrow">YOUR CAREER SPACE</p>
                   <h1>
                     Good to see you, {data.profile.name.split(" ")[0]}
                     <span className="heading-dot">.</span>
@@ -917,7 +916,7 @@ export default function HomePage({
                   />
                   <div>
                     <span className="bot-status">
-                      <span className="online-dot" /> GS IS HERE
+                      <span className="online-dot" /> JoblyAI IS HERE
                     </span>
                     <p>
                       Ready when
@@ -948,7 +947,7 @@ export default function HomePage({
                   {data.profile.location || "Any location"}
                 </span>
                 <button
-                  className="primary-button search-button iosbtn"
+                  className="primary-button search-button iosbtn flterbtn"
                   onClick={() => {
                     setSection("Job search");
                     void runSearch();
