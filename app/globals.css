@@ -3146,4 +3146,7 @@ tbody tr:last-child td {
   -webkit-backdrop-filter: blur(24px) saturate(145%);
   backdrop-filter: blur(24px) saturate(145%);
 }
-
+.flterbtn{
+	height: 30px;
+	width: 30px;
+}
