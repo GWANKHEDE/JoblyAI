@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PwaRegister from "./pwa-register";
+import JoblyBot from "@/components/joblybot";
+
 
 export const metadata: Metadata = {
   title: "JoblyAI | Your career space",
@@ -13,7 +15,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body><PwaRegister />{children}</body>
+      <body><PwaRegister />{children}
+       <JoblyBot />
+       </body>
     </html>
   );
 }
