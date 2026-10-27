@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, BriefcaseBusiness, MapPin, Send, Sparkles, X } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, MapPin, Send, Sparkles, X, Zap, Target } from "lucide-react";
 
 type Job = {
   id: string;
@@ -21,7 +21,7 @@ type Message = {
   jobs?: Job[];
 };
 
-const suggestions = [ "Remote jobs", "Jobs for freshers"];
+const suggestions = [ "Remote jobs", "Find best matches", "Auto-apply jobs" ];
 const skills = ["Next.js", "React", "Node.js", "Python", "JavaScript", "TypeScript", "Java", "Frontend", "Backend", "Full Stack", "DevOps", "PostgreSQL", "AWS"];
 
 function getFilters(message: string) {
@@ -236,8 +236,42 @@ export default function JoblyBot() {
         return;
       }
 
+      if (/neo.*best|best match|top match|find.*best/i.test(lower)) {
+        try {
+          const res = await fetch('/api/neo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'auto_apply_suggest' }) });
+          const data = await res.json();
+          if (data.suggestions && data.suggestions.length > 0) {
+            const jobs = data.suggestions.map((s: any) => s.job);
+            reply(data.message || 'Neo top matches:', jobs);
+          } else {
+            reply(data.message || 'No matches yet. Build your profile and search for jobs.');
+          }
+          return;
+        } catch {
+          reply('Neo recommendations unavailable.');
+          return;
+        }
+      }
+
+      if (/neo.*auto|auto.apply|apply.*suggest/i.test(lower)) {
+        try {
+          const res = await fetch('/api/neo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'auto_apply_suggest' }) });
+          const data = await res.json();
+          if (data.suggestions && data.suggestions.length > 0) {
+            const jobs = data.suggestions.map((s: any) => s.job);
+            reply(data.message || 'Neo auto-apply suggestions:', jobs);
+          } else {
+            reply(data.message || 'No matches yet. Build your profile and search for jobs.');
+          }
+          return;
+        } catch {
+          reply('Neo auto-apply suggestions unavailable.');
+          return;
+        }
+      }
+
       if (/help|what can you|how does/.test(lower)) {
-        reply("I'm Muse, your tiny job-hunting buddy! 💙 Search by skill, location, work mode, or experience. Try “React jobs in Pune” or “remote jobs for freshers”.");
+        reply("I'm JoblyAI agent! ?? Smart job matching, resume tailoring advice & auto-apply suggestions. Try “Find best matches” or “Auto-apply suggestions”.");
         return;
       }
 
@@ -341,13 +375,13 @@ export default function JoblyBot() {
               </div>
             </div>
 
-            <form onSubmit={(e) => void sendMessage(input, e)} className="mx-3 focushide h-10 mb-2 flex items-center gap-2 rounded-full border border-stone-200 bg-white p-1 pl-4 shadow-sm transition focus-within:border-violet-400 focus-within:ring-4 focus-within:ring-violet-500/10 dark:border-white/10 dark:bg-[#1c1c1e]">
+            <form onSubmit={(e) => void sendMessage(input, e)} className="mx-1.5 focushide h-10 mb-2 flex items-center gap-2 rounded-full border border-stone-200 bg-white p-1 pl-4 shadow-sm transition focus-within:border-violet-400 focus-within:ring-4 focus-within:ring-violet-500/10 dark:border-white/10 dark:bg-[#1c1c1e]">
               <input value={input} onChange={(e) => setInput(e.target.value)} maxLength={300} aria-label="Message JoblyAI" placeholder="Tell JoblyAI your dream job..." className="min-w-0 focushide flex-1 bg-transparent py-2 text-sm! outline-none placeholder:text-stone-400 dark:text-white" />
               <button type="submit" disabled={!input.trim() || typing} aria-label="Send message" className="grid size-8 shrink-0 place-items-center rounded-full bg-gradient-to-b from-violet-500 to-indigo-600 text-white transition active:scale-90 disabled:bg-none disabled:bg-stone-100 disabled:text-stone-400 dark:disabled:bg-white/10">
                 <Send size={14} />
               </button>
             </form>
-            <p className="shrink-0 bg-white py-2 px-0.5 text-center text-[9px] text-stone-400">Verify job details ·<span className="textbg"> JoblyAI</span></p>
+            {/* <p className="shrink-0 bg-white py-2 px-0.5 text-center text-[9px] text-stone-400">Verify job details ·<span className="textbg"> JoblyAI</span></p> */}
           </motion.section>
         )}
       </AnimatePresence>
