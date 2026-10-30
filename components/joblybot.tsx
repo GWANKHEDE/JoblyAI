@@ -566,7 +566,7 @@ export default function JoblyBot() {
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2 }}
             aria-label="Muse AI career assistant"
-            className="fixed inset-x-2 bottom-4 flex h-[80dvh] flex-col overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(#fffdfa,#fffdfa)_padding-box,linear-gradient(135deg,#e5e7eb,#f5d0a9,#e9d5ff)_border-box] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.22),0_8px_24px_-12px_rgba(0,0,0,0.12)] backdrop-blur-2xl sm:inset-x-auto sm:right-4 sm:w-[360px] p-0.5"
+            className="fixed bg-white! inset-x-2 bottom-4 flex h-[80dvh] flex-col overflow-hidden rounded-2xl border border-transparent bg-[linear-gradient(#fffdfa,#fffdfa)_padding-box,linear-gradient(135deg,#e5e7eb,#f5d0a9,#e9d5ff)_border-box] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.22),0_8px_24px_-12px_rgba(0,0,0,0.12)] backdrop-blur-2xl sm:inset-x-auto sm:right-4 sm:w-[360px]"
           >
             {/* <header className="flex shrink-0 items-center gap-3 border-b border-orange-100 bg-white px-4 py-3">
               <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-gradient-to-br from-orange-50 to-violet-100"><Muse small /></div>
@@ -577,7 +577,7 @@ export default function JoblyBot() {
               </div>
               <button onClick={() => setOpen(false)} aria-label="Close chat" className="grid h-9 w-9 place-items-center rounded-xl bg-stone-50 text-stone-500 hover:bg-violet-50"><X size={18} /></button>
             </header> */}
-            <div className="pointer-events-none absolute -inset-1 -z-10 rounded-3xl bg-gradient-to-r from-violet-400/20 via-pink-300/20 to-orange-300/20 blur-2xl" />
+            <div className="pointer-events-none absolute -inset-1 -z-10 rounded-3xl blur-2xl" />
 
             <div className="relative flex shrink-0 items-center overflow-hidden bg-gradient-to-br from-[#fff0dc] via-[#f5eaff] to-[#e3f7ff] p-4">
               <div className="relative z-10">
@@ -701,7 +701,7 @@ export default function JoblyBot() {
         whileTap={{ scale: 0.94 }}
         animate={open || reduceMotion ? undefined : { y: [0, -4, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        className={`relative ml-auto grid place-items-center border border-white bg-gradient-to-br from-[#fff0dc] via-[#f2eaff] to-[#def6ff] shadow-[0_10px_30px_#795d4c30] ${open ? "h-6 w-6 rounded-2xl" : "h-16 w-16 rounded-2xl"}`}
+        className={`relative ml-auto grid place-items-center border border-white bg-gradient-to-br from-[#fff0dc] via-[#f2eaff] to-[#def6ff] shadow-[0_10px_30px_#795d4c30] ${open ? "hidden! h-6 w-6 rounded-2xl" : "h-16 w-16 rounded-2xl"}`}
       >
         {open ? (
           <X size={20} className="text-violet-600" />
