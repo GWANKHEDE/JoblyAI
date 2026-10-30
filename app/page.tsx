@@ -2275,10 +2275,10 @@ function JobModal({
             <ArrowRight size={15} />
           </button>
         </div>
-        <p className="approval-disclaimer">
+        {/* <p className="approval-disclaimer">
           This creates a pending-approval tracker entry only. Review and submit
           on the employer&apos;s official site.
-        </p>
+        </p> */}
       </section>
     </div>
   );
