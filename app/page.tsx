@@ -903,7 +903,7 @@ export default function HomePage({
                 <div>
                   <h1>
                     Good to see you, {data.profile.name.split(" ")[0]}
-                    <span className="heading-dot">.</span>
+                    <span className="heading-dot text-primary">.</span>
                   </h1>
                   <p className="welcome-copy">
                     Your next opportunity is out there. Let&apos;s bring it a
